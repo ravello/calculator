@@ -16,10 +16,6 @@ function divide(a, b) {
 
 function operate(operator, a, b) {
 
-    console.log("op: " + operator);
-    console.log("a: "+a);
-    console.log("b: "+b);
-
     switch (operator) {
         case '+':
             return add(a, b);
