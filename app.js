@@ -15,6 +15,9 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
+    console.log("operator: " + operator);
+    console.log("a: " + a);
+    console.log("b: " + b);
     switch (operator) {
         case '+':
             return add(a, b);
@@ -35,7 +38,6 @@ let number1 = null;
 let number2 = null;
 let operator = null;
 let shouldResetDisplay = false;
-let lastPressedEquals = false;
 
 function populateDisplay(digit) {
     if (textBox.value.length === 1 && textBox.value == "0") {
@@ -62,10 +64,9 @@ body.addEventListener("click", (event) => {
         }
 
         populateDisplay(event.target.id);
-        lastPressedEquals = false;
     } else if (event.target.className === "operator") {
         // if memory is already stored, store in num2 & calculate
-        if ((operator !== null || number1 !== null) && !lastPressedEquals) {
+        if (operator !== null || number1 !== null) {
             number2 = parseInt(textBox.value);  // store in num2
             const result = operate(operator, number1, number2);  // calculate
             textBox.value = result;  // display
@@ -76,7 +77,6 @@ body.addEventListener("click", (event) => {
         operator = event.target.textContent;  // store operator
 
         shouldResetDisplay = true;
-        lastPressedEquals = false;
     } else if (event.target.id === "equals") {
         if (number2 == null) number2 = parseInt(textBox.value);
 
@@ -88,9 +88,7 @@ body.addEventListener("click", (event) => {
         number1 = parseInt(textBox.value);
 
         shouldResetDisplay = true;
-        lastPressedEquals = true;
     } else if (event.target.id === "clear") {
         clearButton();
-        lastPressedEquals = false;
     }
 });
